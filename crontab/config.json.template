@@ -1,0 +1,23 @@
+[{
+	"name":"database-backup",
+	"comment":"create hourly database backups",
+	"schedule":"02 7-19,23 * * *",
+	"command":"/backupscripts/simplebackup_hourly.sh",
+	"project":"PROJECTNAME",
+	"container":"db"
+},{
+	"name":"backupreduce-daily",
+	"comment":"keep last backup from yesterday and delete the rest",
+	"schedule":"@daily",
+	"command":"/backupscripts/backupreduce_daily.sh",
+	"project":"PROJECTNAME",
+	"container":"db"
+},{
+        "name":"backupreduce-monthly",
+	"comment":"keep last backup from last month and delete the rest",
+	"schedule":"@monthly",
+	"command":"/backupscripts/backupreduce_monthly.sh",
+	"project":"PROJECTNAME",
+	"container":"db"
+}]
+
