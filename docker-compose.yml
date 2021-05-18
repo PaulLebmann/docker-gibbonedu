@@ -6,7 +6,7 @@ services:
     hostname: mariadb
     restart: always
     environment:
-      - LANG=de_DE.utf8
+      - LANG
       - MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE
       - MYSQL_USER
