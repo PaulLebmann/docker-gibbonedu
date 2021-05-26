@@ -34,8 +34,6 @@ services:
       - VIRTUAL_HOST=${GIBBON_SITENAME}
         #      - LETSENCRYPT_HOST
         #      - LETSENCRYPT_EMAIL
-#    ports:
-#      - 80:80
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - gibbon-root:${GIBBON_BASEDIR}
@@ -51,9 +49,6 @@ services:
     hostname: gibbon-php
     restart: always
     environment:
-      - AUTOUPGRADE
-      - DEVELOPER_NAME
-      - DEVELOPER_EMAIL
       - GIBBON_SITENAME
       - GIBBON_VERSION
       - GIBBON_DB_HOST=mariadb
@@ -62,7 +57,6 @@ services:
       - GIBBON_DB_USER=${MYSQL_USER}
       - GIBBON_DB_PASSWORD=${MYSQL_PASSWORD}
       - GIBBON_BASEDIR
-      - DEV_SITE
     volumes:
       - gibbon-root:${GIBBON_BASEDIR}
     networks:
