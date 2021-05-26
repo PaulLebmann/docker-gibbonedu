@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb
+    hostname: mariadb
+    restart: always
+    environment:
+      - LANG
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    volumes:
+      - ./db/initdb:/docker-entrypoint-initdb.d
+      - gibbon-db-data:/var/lib/mysql
+      - gibbon-db-log:/var/log/mysql
+      - ./db/backup:/backup
+      - ./db/backupscripts:/backupscripts
+      - /etc/localtime:/etc/localtime:ro
+    
+  apache:
+    build: ./webserver
+    hostname: gibbon-apache
+    restart: always
+    depends_on:
+      - php
+    environment:
+      - GIBBON_SITENAME
+      - SERVER_ADMIN_MAIL
+    ports:
+      - 80:80
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - gibbon-root:${GIBBON_BASEDIR}
+
+  php:
+    build: 
+      context: ./php
+      dockerfile: Dockerfile
+      target: dev
+    hostname: gibbon-php
+    restart: always
+    environment:
+      - GIBBON_SITENAME
+      - GIBBON_VERSION
+      - GIBBON_DB_HOST=mariadb
+      - GIBBON_DB_PORT=3306
+      - GIBBON_DB_DB=${MYSQL_DATABASE}
+      - GIBBON_DB_USER=${MYSQL_USER}
+      - GIBBON_DB_PASSWORD=${MYSQL_PASSWORD}
+      - GIBBON_BASEDIR
+    volumes:
+      - gibbon-root:${GIBBON_BASEDIR}
+
+  crontab:
+    image: willfarrell/crontab
+    depends_on:
+      - php
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./crontab/config.json:/opt/crontab/config.json:rw
+
+  smtpd:
+    image: namshi/smtp
+    restart: always
+    depends_on:
+      - php
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MAILNAME
+      - SMARTHOST_ADDRESS
+      - SMARTHOST_PORT
+      - SMARTHOST_USER
+      - SMARTHOST_PASSWORD
+      - SMARTHOST_ALIASES
+
+volumes:
+  gibbon-db-data:
+  gibbon-db-log:
+  gibbon-root:
