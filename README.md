@@ -2,8 +2,8 @@
 ## What this setup does
 The Dockerfiles in php and webserver create minimal images with apache, configured for php-fpm, and php-fpm to enable gibbon to run.
 
-docker-compose.yml assumes there is an additional reverse proxy - in this case [jwilder/nginx-proxy]{https://hub.docker.com/r/jwilder/nginx-proxy}, either running in one container or running nginx and docker-gen separated, on the network "webfront".
-It further assumes there is an external network "backup" for accessing the database to create backups i.e. with [Bareos in Docker]{https://github.com/barcus/bareos}.
+docker-compose.yml assumes there is an additional reverse proxy - in this case [jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy), either running in one container or running nginx and docker-gen separated, on the network "webfront".
+It further assumes there is an external network "backup" for accessing the database to create backups i.e. with [Bareos in Docker](https://github.com/barcus/bareos).
 
 If you migrate your database put your databasedump in ./db/initdb/ before the first time you run docker-compose up -d. Adjustments to the database, like migration to another URL have to be done by you either in advance in the dump or via SQL using the mysql client.
 
@@ -28,7 +28,7 @@ docker-compose.simple.yml:
 1. Clone the repo
 2. run "docker network create webfront"
 3. run "docker network create backup"
-4. setup jwilder/nginx-proxy in a separate docker-compose project. If you plan on using it in production add [letsencrypt-nginx-proxy-companion]{https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion} to your nginx-proxy setup
+4. setup jwilder/nginx-proxy in a separate docker-compose project. If you plan on using it in production add [letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) to your nginx-proxy setup
 5. add the network webfront to nginx-proxy
 6. copy example.env to .env
 7. change the values in .env to match your domain, and LOCALE and passwords
