@@ -17,25 +17,25 @@ docker-compose.simple.yml:
 2. rename docker-compose.simple.yml to docker-compose.yml
 3. copy example.env to .env
 4. change the values in .env to match your domain, and LOCALE and passwords
-5. run bash ./crontab\_create.sh
-6. run docker-compose pull
-7. run docker-compose build
-8. run docker-compose up -d
+5. run `bash ./crontab\_create.sh`
+6. run `docker-compose pull`
+7. run `docker-compose build`
+8. run `docker-compose up -d`
 9. visit your server the way you set it up either via a domain name or via ip:80 and start the Gibbon setup
 
 
 ### Setup with reverse Proxy and TLS
 1. Clone the repo
-2. run "docker network create webfront"
-3. run "docker network create backup"
+2. run `docker network create webfront`
+3. run `docker network create backup`
 4. setup jwilder/nginx-proxy in a separate docker-compose project. If you plan on using it in production add [letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) to your nginx-proxy setup
 5. add the network webfront to nginx-proxy
 6. copy example.env to .env
 7. change the values in .env to match your domain, and LOCALE and passwords
-8. run bash ./crontab\_create.sh
-9. run docker-compose pull
-10. run docker-compose build
-11. run docker-compose up -d
+8. run `bash ./crontab\_create.sh`
+9. run `docker-compose pull`
+10. run `docker-compose build`
+11. run `docker-compose up -d`
 12. visit your server the way you set it up either via its domain name
 
 ## Backupstrategy
