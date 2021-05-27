@@ -1,4 +1,4 @@
-#Gibbon in Docker 
+# Gibbon in Docker 
 ## What this setup does
 The Dockerfiles in php and webserver create minimal images with apache, configured for php-fpm, and php-fpm to enable gibbon to run.
 
