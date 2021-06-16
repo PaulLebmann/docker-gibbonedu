@@ -29,7 +29,7 @@ services:
       - GIBBON_SITENAME
       - SERVER_ADMIN_MAIL
     ports:
-      - 80:80
+      - 81:80
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - gibbon-root:${GIBBON_BASEDIR}
@@ -60,7 +60,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./crontab/config.json:/opt/crontab/config.json:rw
+      - type: bind
+        source: ./crontab/config.json
+        target: /opt/crontab/config.json
+        read_only: true
 
   smtpd:
     image: namshi/smtp
