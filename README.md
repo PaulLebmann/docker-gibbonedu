@@ -17,7 +17,7 @@ docker-compose.simple.yml:
 2. rename docker-compose.simple.yml to docker-compose.yml
 3. copy example.env to .env
 4. change the values in .env to match your domain, and LOCALE and passwords
-5. run `bash ./crontab\_create.sh`
+5. run `bash ./crontab_create.sh`
 6. run `docker-compose pull`
 7. run `docker-compose build`
 8. run `docker-compose up -d`
@@ -32,7 +32,7 @@ docker-compose.simple.yml:
 5. add the network webfront to nginx-proxy
 6. copy example.env to .env
 7. change the values in .env to match your domain, and LOCALE and passwords
-8. run `bash ./crontab\_create.sh`
+8. run `bash ./crontab_create.sh`
 9. run `docker-compose pull`
 10. run `docker-compose build`
 11. run `docker-compose up -d`
