@@ -69,7 +69,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./crontab/config.json:/opt/crontab/config.json:rw
+      - type: bind
+        source: ./crontab/config.json
+        target: /opt/crontab/config.json
+        read_only: true
 
   smtpd:
     image: namshi/smtp
