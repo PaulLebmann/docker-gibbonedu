@@ -8,11 +8,11 @@ if echo "$GIBBON_INSTALLED_VERSION" | grep -q "$GIBBON_VERSION"; then
     echo "-------------- Gibbon is up to date ----------------"
 else
     echo "-------------- Downloading gibbon ----------------"
-    su -s /bin/sh -c "cd /tmp && wget https://github.com/GibbonEdu/core/archive/v${GIBBON_VERSION}.tar.gz" www-data
+    su -s /bin/sh -c "cd /tmp && wget https://github.com/GibbonEdu/core/releases/download/v${GIBBON_VERSION}/GibbonEduCore-InstallBundle.tar.gz" www-data
     echo "-------------- Moving gibbon into place ----------------"
-    su -s /bin/sh -c "tar xfz /tmp/v${GIBBON_VERSION}.tar.gz -C /tmp/" www-data
-    chown www-data:www-data -R /tmp/core-${GIBBON_VERSION}
-    rsync -vua /tmp/core-${GIBBON_VERSION}/ ${GIBBON_BASEDIR}
+    su -s /bin/sh -c "mkdir /tmp/Gibbon && tar xfz /tmp/GibbonEduCore-InstallBundle.tar.gz -C /tmp/Gibbon" www-data
+    chown www-data:www-data -R /tmp/Gibbon
+    rsync -vua /tmp/Gibbon/ ${GIBBON_BASEDIR}
 #    su -s /bin/sh -c "rsync -vua /tmp/core-${GIBBON_VERSION}/ /var/www/html/" www-data
 #    su -s /bin/sh -c "rm /tmp/v${GIBBON_VERSION}.tar.gz && rm -rf /tmp/core-${GIBBON_VERSION}" www-data
     chown www-data:www-data -R ${GIBBON_BASEDIR}
