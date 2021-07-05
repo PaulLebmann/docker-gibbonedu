@@ -13,8 +13,6 @@ else
     su -s /bin/sh -c "mkdir /tmp/Gibbon && tar xfz /tmp/GibbonEduCore-InstallBundle.tar.gz -C /tmp/Gibbon" www-data
     chown www-data:www-data -R /tmp/Gibbon
     rsync -vua /tmp/Gibbon/ ${GIBBON_BASEDIR}
-#    su -s /bin/sh -c "rsync -vua /tmp/core-${GIBBON_VERSION}/ /var/www/html/" www-data
-#    su -s /bin/sh -c "rm /tmp/v${GIBBON_VERSION}.tar.gz && rm -rf /tmp/core-${GIBBON_VERSION}" www-data
     chown www-data:www-data -R ${GIBBON_BASEDIR}
     echo "-------------- check index.html  exists ----------------"
     if [ ! -f "${GIBBON_BASEDIR}/index.html" ]; then
