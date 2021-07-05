@@ -7,6 +7,8 @@ It further assumes there is an external network "backup" for accessing the datab
 
 If you migrate your database put your databasedump in ./db/initdb/ before the first time you run docker-compose up -d. Adjustments to the database, like migration to another URL have to be done by you either in advance in the dump or via SQL using the mysql client.
 
+Since the download URL pattern on Github changed from version 21.0.01 to 22.0.00 it is no longer possible to download 21.0.01 with the latest commit.
+
 
 ## What you have to do
 ### Basic Setup
@@ -36,7 +38,19 @@ docker-compose.simple.yml:
 9. run `docker-compose pull`
 10. run `docker-compose build`
 11. run `docker-compose up -d`
-12. visit your server the way you set it up either via its domain name
+12. visit your server the way you set it up via its domain name
+
+### Upgrade (tested 21.0.01 to 22.0.00)
+The upgrade procedure reflects [https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/](https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/).
+
+1. Backup your database and installation files.
+2. edit your .env file to reflect the desired version
+3. Login to your Gibbon installation and go to Admin > System Admin > Update
+4. run `docker-compose up -d`
+5. Refresh the Update page, and it should show there are some database updates to be run. Run these by pressing the Submit button.
+
+It also worked for me when I did not go to the update page in advance. So when visiting Admin > System Admin I got presented with the upgrade page.
+
 
 ## Backupstrategy
 As mentioned above a separate backup network is created for using backup software like Bareos to backup the database.
