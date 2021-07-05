@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # GIBBON_VERSION set in .env file
-GIBBON_INSTALLED_VERSION=$(grep $GIBBON_VERSION /var/www/html/version.php)
+GIBBON_INSTALLED_VERSION=$(grep "version =" /var/www/html/version.php)
 
 echo "-------------- Checking if a gibbon is up to date ----------------"
 if echo "$GIBBON_INSTALLED_VERSION" | grep -q "$GIBBON_VERSION"; then
