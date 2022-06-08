@@ -23,7 +23,7 @@ docker-compose.simple.yml:
 6. run `docker-compose pull`
 7. run `docker-compose build`
 8. run `docker-compose up -d`
-9. visit your server the way you set it up either via a domain name or via ip:80 and start the Gibbon setup
+9. visit your server the way you set it up either via a domain name or via ip:80 and start the Gibbon web based setup process
 
 
 ### Setup with reverse Proxy and TLS
@@ -38,9 +38,9 @@ docker-compose.simple.yml:
 9. run `docker-compose pull`
 10. run `docker-compose build`
 11. run `docker-compose up -d`
-12. visit your server the way you set it up via its domain name
+12. visit your server the way you set it up either via a domain name or via ip:80 and start the Gibbon web based setup process
 
-### Upgrade (tested 21.0.01 to 22.0.00)
+### Upgrade (tested 21.0.01 to 22.0.00, tested 22.0.01 to 23.0.02)
 The upgrade procedure reflects [https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/](https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/).
 
 1. Backup your database and installation files.
