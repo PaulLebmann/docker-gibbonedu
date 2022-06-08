@@ -32,8 +32,8 @@ services:
       - GIBBON_SITENAME
       - SERVER_ADMIN_MAIL
       - VIRTUAL_HOST=${GIBBON_SITENAME}
-        #      - LETSENCRYPT_HOST
-        #      - LETSENCRYPT_EMAIL
+#      - LETSENCRYPT_HOST
+#      - LETSENCRYPT_EMAIL
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - gibbon-root:${GIBBON_BASEDIR}
@@ -51,11 +51,11 @@ services:
     environment:
       - GIBBON_SITENAME
       - GIBBON_VERSION
-      - GIBBON_DB_HOST=mariadb
-      - GIBBON_DB_PORT=3306
-      - GIBBON_DB_DB=${MYSQL_DATABASE}
-      - GIBBON_DB_USER=${MYSQL_USER}
-      - GIBBON_DB_PASSWORD=${MYSQL_PASSWORD}
+#      - GIBBON_DB_HOST=mariadb
+#      - GIBBON_DB_PORT=3306
+#      - GIBBON_DB_DB=${MYSQL_DATABASE}
+#      - GIBBON_DB_USER=${MYSQL_USER}
+#      - GIBBON_DB_PASSWORD=${MYSQL_PASSWORD}
       - GIBBON_BASEDIR
     volumes:
       - gibbon-root:${GIBBON_BASEDIR}
