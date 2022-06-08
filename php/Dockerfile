@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine as minimum
+FROM php:8.1-fpm-alpine as minimum
 
 # necessary if pecl has to be used later
 ENV LIBRARY_PATH=/lib:/usr/lib
