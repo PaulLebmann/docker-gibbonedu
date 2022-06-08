@@ -16,6 +16,10 @@ RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 FROM minimum as dev
 
+RUN apk add git openssh-client patch rsync \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && su -s /bin/sh -c "mkdir ~/.ssh && chmod 0700 ~/.ssh && mkdir ~/salt && mkdir ~/templates && mkdir -p /var/www/html/web/sites" www-data
+
 COPY ./docker-php-gibbonsetup /usr/local/bin/
 
 RUN apk add rsync \

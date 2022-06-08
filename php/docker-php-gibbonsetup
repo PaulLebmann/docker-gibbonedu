@@ -18,13 +18,19 @@ else
     if [ -z "$GIBBON_INSTALLED_VERSION" ]; then
       echo "-------------- check index.html  exists ----------------"
       if [ "${GIBBON_BASEDIR}/index.html" ]; then
-        echo "---------------- removeint index.html ----------------"
+        echo "---------------- removing index.html ----------------"
         rm ${GIBBON_BASEDIR}/index.html
       else
         echo "-------------- index.html does not exist, everything is fine ----------------"
       fi
     else
-        echo "-------------- check for upgrade specific actions ----------------"
+        echo "-------------- Upgrade specific tasks  ----------------"
+        echo "-------------- cleanup vendor directory ----------------"
+        su -s /bin/sh -c "cd ${GIBBON_BASEDIR} && composer clearcache" www-data
+        su -s /bin/sh -c "rm -rf ${GIBBON_BASEDIR}/vendor" www-data
+        su -s /bin/sh -c "cd ${GIBBON_BASEDIR} && composer install --no-dev" www-data
+
+        echo "-------------- check for upgrade versionspecific actions ----------------"
         if echo ${GIBBON_VERSION} | grep -Eq '^22\.'; then
             echo "---------------- upgrade actions for version 22.xx.xx ----------------"
 	    # Note that in the switch to v22 the module Roll Groups has been replaced with Form Groups. If you are updating using this method from a version prior to v22 you will need to run this command too
