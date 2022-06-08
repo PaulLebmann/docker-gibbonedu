@@ -44,11 +44,6 @@ services:
     environment:
       - GIBBON_SITENAME
       - GIBBON_VERSION
-      - GIBBON_DB_HOST=mariadb
-      - GIBBON_DB_PORT=3306
-      - GIBBON_DB_DB=${MYSQL_DATABASE}
-      - GIBBON_DB_USER=${MYSQL_USER}
-      - GIBBON_DB_PASSWORD=${MYSQL_PASSWORD}
       - GIBBON_BASEDIR
     volumes:
       - gibbon-root:${GIBBON_BASEDIR}
