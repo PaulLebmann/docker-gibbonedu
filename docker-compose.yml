@@ -98,8 +98,8 @@ volumes:
 
 networks:
   webfront:
-    external:
-      name: webfront
+    name: webfront
+    external: true
   backup:
-    external:
-      name: backup
+    name: backup
+    external: true
