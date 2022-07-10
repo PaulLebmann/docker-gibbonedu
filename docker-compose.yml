@@ -59,6 +59,7 @@ services:
       - GIBBON_BASEDIR
     volumes:
       - gibbon-root:${GIBBON_BASEDIR}
+      - gibbon-php-sessions:/sessions
     networks:
       - default
 
@@ -95,6 +96,7 @@ volumes:
   gibbon-db-data:
   gibbon-db-log:
   gibbon-root:
+  gibbon-php-sessions:
 
 networks:
   webfront:

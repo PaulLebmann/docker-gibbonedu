@@ -13,6 +13,7 @@ COPY ./gibbon-php-settings.ini "$PHP_INI_DIR/conf.d/gibbon-php-settings.ini"
 COPY ./docker-php-mailrelay.ini "$PHP_INI_DIR/conf.d/docker-php-mailrelay.ini"
 
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+RUN mkdir /sessions && chown -R www-data:www-data /sessions
 
 FROM minimum as dev
 
