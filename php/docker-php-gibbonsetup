@@ -41,6 +41,9 @@ else
 	    fi
         fi
     fi
+    echo "-------------- temporary files cleanup  ----------------"
+    rm /tmp/GibbonEduCore-InstallBundle.tar.gz
+    rm -rf /tmp/Gibbon
 #    sed -i "s/$databaseServer = .*$/$databaseServer = '${GIBBON_DB_HOST}';/g" ${GIBBON_BASEDIR}/config.php
 #    sed -i "s/$databaseUsername = .*$/$databaseUsername = '${GIBBON_DB_USER}';/g" ${GIBBON_BASEDIR}/config.php
 #    sed -i "s/$databasePassword = .*$/$databasePassword = '${GIBBON_DB_PASSWORD}';/g" ${GIBBON_BASEDIR}/config.php
