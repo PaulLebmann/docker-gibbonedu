@@ -11,6 +11,6 @@ if [ -z "$BACKUP_DB_NAME" ]; then
 fi
 
 
-mysqldump -u root --password=$MYSQL_ROOT_PASSWORD $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUM".sql.gz"
+mariadb-dump -u root --password=$MYSQL_ROOT_PASSWORD $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUM".sql.gz"
 DATUMP=$(date +"%Y-%m-%d %H:%M")
 echo "$DATUMP => Backed up database" 
