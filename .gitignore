@@ -2,3 +2,4 @@
 db/initdb
 db/backup
 crontab/config.json
+*.swp
