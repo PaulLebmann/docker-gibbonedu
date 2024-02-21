@@ -40,7 +40,16 @@ docker-compose.simple.yml:
 11. run `docker-compose up -d`
 12. visit your server the way you set it up either via a domain name or via ip:80 and start the Gibbon web based setup process
 
-### Upgrade (tested 21.0.01 to 22.0.00, tested 22.0.01 to 23.0.02)
+### Upgrade
+
+#### Upgrades paths tested:
+- 21.0.01 to 22.0.00 (with older php - version)
+- 22.0.01 to 23.0.02 (with older php - version)
+- 24.0.01 to 25.0.01 (with php 8.1, 8.2 and 8.3)
+- 25.0.01 to 26.0.00 (with php 8.1, 8.2 and 8.3)
+
+**Attention:** Upgrades from older Gibbon - versions were tested with older php - versions. If an upgrade won't work, try switching to an older php - version in php/Dockerfile. Nonetheless I' recommend using recent versions of gibbon and php to profit from security patches.
+
 The upgrade procedure reflects [https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/](https://docs.gibbonedu.org/administrators/getting-started/updating-gibbon/).
 
 1. Backup your database and installation files.
@@ -48,8 +57,6 @@ The upgrade procedure reflects [https://docs.gibbonedu.org/administrators/gettin
 3. Login to your Gibbon installation and go to Admin > System Admin > Update
 4. run `docker-compose up -d`
 5. Refresh the Update page, and it should show there are some database updates to be run. Run these by pressing the Submit button.
-
-It also worked for me when I did not go to the update page in advance. So when visiting Admin > System Admin I got presented with the upgrade page.
 
 
 ## Backupstrategy
