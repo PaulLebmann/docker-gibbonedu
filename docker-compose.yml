@@ -18,6 +18,14 @@ services:
       - ./db/backup:/backup
       - ./db/backupscripts:/backupscripts
       - /etc/localtime:/etc/localtime:ro
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.db-backup.schedule: "0 2 7-19,23 * * *"
+      ofelia.job-exec.db-backup.command: "/backupscripts/simplebackup_hourly.sh"
+      ofelia.job-exec.backupreduce-daily.schedule: "@daily"
+      ofelia.job-exec.backupreduce-daily.command: "/backupscripts/backupreduce_daily.sh"
+      ofelia.job-exec.backupreduce-monthly.schedule: "@monthly"
+      ofelia.job-exec.backupreduce-monthly.command: "/backupscripts/backupreduce_monthly.sh"
     networks:
       - default
       - backup
@@ -63,17 +71,13 @@ services:
     networks:
       - default
 
-  crontab:
-    image: willfarrell/crontab
+  ofelia:
+    image: mcuadros/ofelia:latest
     depends_on:
-      - php
+      - db
+    command: daemon --docker -f label=com.docker.compose.project=${COMPOSE_PROJECT_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/localtime:/etc/localtime:ro
-      - type: bind
-        source: ./crontab/config.json
-        target: /opt/crontab/config.json
-        read_only: true
 
   smtpd:
     image: namshi/smtp
