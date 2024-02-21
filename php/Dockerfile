@@ -2,9 +2,11 @@ FROM php:8.1-fpm-alpine as minimum
 
 # necessary if pecl has to be used later
 ENV LIBRARY_PATH=/lib:/usr/lib
-RUN apk add zlib-dev libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev imagemagick imagemagick-dev gettext gettext-dev $PHPIZE_DEPS \
+RUN apk add zlib-dev libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev imagemagick imagemagick-dev gettext gettext-dev icu icu-data-full icu-dev icu-libs $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql gd opcache zip gettext \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
 #    && docker-php-ext-enable apcu \
     && cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
