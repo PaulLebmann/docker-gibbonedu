@@ -11,6 +11,7 @@ services:
       - MYSQL_DATABASE
       - MYSQL_USER
       - MYSQL_PASSWORD
+      - MARIADB_AUTO_UPGRADE
     volumes:
       - ./db/initdb:/docker-entrypoint-initdb.d
       - gibbon-db-data:/var/lib/mysql
