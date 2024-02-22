@@ -69,4 +69,4 @@ Therefore you should be fine using tar, rsync, borg or any other tool on those t
 ## Reset your installation
 With the bash script reset.sh you are able to start fresh.
 
-Please use it with caution. It removes all the volumes, and therefore the database as well as the files, from the current project. I reccommend executing it with bash ./reset.sh instead of changing its mode to executeable to prevent running it without thinking twice about deleting your data.
+Please use it with caution. It removes all the volumes, and therefore the database as well as the files, from the current project. I reccommend executing it with `bash ./reset.sh` instead of changing its mode to executeable to prevent running it without thinking twice about deleting your data.
