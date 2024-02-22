@@ -3,14 +3,31 @@
 DATUM=$(date +"%Y%m%d-%H%M")
 
 if [ -z "$BACKUP_DB_NAME" ]; then
-    if [ -z "$MYSQL_DATABASE" ]; then
-        echo "Neither Environment variable BACKUP_DB_NAME nor MYSQL_DATABASE set"
-        exit 1
+    if [ -z "$MARIADB_DATABASE" ]; then
+        if [ -z "$MYSQL_DATABASE" ]; then
+            echo "Neither Environment variable BACKUP_DB_NAME nor MARIADB_DATABASE or MYSQL_DATABASE are set"
+	    exit 1
+	else
+	    BACKUP_DB_NAME=$MYSQL_DATABASE
+	fi
+    else
+        BACKUP_DB_NAME=$MARIADB_DATABASE
     fi
-    BACKUP_DB_NAME=$MYSQL_DATABASE
+fi
+if [ -z "$BACKUP_DB_ROOT_PW" ]; then
+    if [ -z "$MARIADB_ROOT_PASSWORD" ]; then
+        if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+            echo "Neither Environment variable BACKUP_DB_NAME nor MARIADB_DATABASE or MYSQL_DATABASE are set"
+	    exit 1
+	else
+	    BACKUP_DB_ROOT_PW=$MYSQL_ROOT_PASSWORD
+	fi
+    else
+        BACKUP_DB_ROOT_PW=$MARIADB_ROOT_PASSWORD
+    fi
 fi
 
 
-mariadb-dump -u root --password=$MYSQL_ROOT_PASSWORD $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUM".sql.gz"
+mariadb-dump -u root --password=$BACKUP_DB_ROOT_PW $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUM".sql.gz"
 DATUMP=$(date +"%Y-%m-%d %H:%M")
 echo "$DATUMP => Backed up database" 

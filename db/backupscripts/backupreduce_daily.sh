@@ -1,12 +1,16 @@
 #!/bin/sh
 if [ -z "$BACKUP_DB_NAME" ]; then
-    if [ -z "$MYSQL_DATABASE" ]; then
-        echo "Neither Environment variable BACKUP_DB_NAME nor MYSQL_DATABASE set"
-        exit 1
+    if [ -z "$MARIADB_DATABASE" ]; then
+        if [ -z "$MYSQL_DATABASE" ]; then
+            echo "Neither Environment variable BACKUP_DB_NAME nor MARIADB_DATABASE or MYSQL_DATABASE are set"
+            exit 1
+        else
+            BACKUP_DB_NAME=$MYSQL_DATABASE
+        fi
+    else
+        BACKUP_DB_NAME=$MARIADB_DATABASE
     fi
-    BACKUP_DB_NAME=$MYSQL_DATABASE
 fi
-
 
 DATUM=$(date +"%Y%m%d-%H%M")
 DATUMGESTERNBACKUP=$(date -d "yesterday 23:00" +"%Y%m%d-%H%M")
