@@ -7,10 +7,10 @@ services:
     restart: always
     environment:
       - LANG
-      - MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE
-      - MYSQL_USER
-      - MYSQL_PASSWORD
+      - MARIADB_ROOT_PASSWORD
+      - MARIADB_DATABASE
+      - MARIADB_USER
+      - MARIADB_PASSWORD
       - MARIADB_AUTO_UPGRADE
     volumes:
       - ./db/initdb:/docker-entrypoint-initdb.d
