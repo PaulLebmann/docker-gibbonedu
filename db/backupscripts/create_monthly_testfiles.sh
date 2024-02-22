@@ -8,27 +8,13 @@ if [ -z "$BACKUP_DB_NAME" ]; then
     BACKUP_DB_NAME=$MYSQL_DATABASE
 fi
 
+DATE_LAST_MONTH=$(date --date="$(date +%Y-%m-15) -1 month" +'%Y%m')
+DATE_YESTERDAY=$(date -d "yesterday" +"%Y%m%d")
 
-#DATUM=$(date +"%Y%m%d-%H%M")
-DATUMJAHR=$(date +"%Y")
-DATUMMONAT=$(date +"%m")
-DATUMLETZTERMONAT=$(date --date="$(date +%Y-%m-15) -1 month" +'%Y%m')
-DATUMGESTERN=$(date -d "yesterday" +"%Y%m%d")
+echo $DATE_LAST_MONTH
+echo $DATE_YESTERDAY
 
-DATUMP=$(date +"%Y-%m-%d %H:%M")
-
-echo $DATUMLETZTERMONAT
-echo $DATUMGESTERN
-
-for TAG in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+for DAY in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
 do
-	touch /backup/backup-db-"$BACKUP_DB_NAME"-"$DATUMLETZTERMONAT$TAG".sql.gz
+	touch /backup/backup-db-"$BACKUP_DB_NAME"-"$DATE_LAST_MONTH$DAY".sql.gz
 done
-
-#mv "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERN".sql.gz" "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUMLETZTERMONAT".sql.gz"
-echo "$DATUMP => moved backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERN".sql.gz to backup-db-"$BACKUP_DB_NAME"-"$DATUMLETZTERMONAT".sql.gz"
-#find /backup/ -regex ".*"$DATUMLETZTERMONAT"[0-9][0-9].*" -delete
-#find /backup/ -regex ".*"$DATUMLETZTERMONAT"[0-9][0-9].*"
-#find /backup/ -regex ".*$(echo $DATUMLETZTERMONAT)[0-9][0-9].*"
-
-echo "$DATUMP => removed daily backups from $DATUMLETZTERMONAT" 

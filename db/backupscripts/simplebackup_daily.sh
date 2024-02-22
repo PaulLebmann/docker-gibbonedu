@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DATUM=$(date +"%Y%m%d")
+BACKUP_DATE=$(date +"%Y%m%d")
 
 if [ -z "$BACKUP_DB_NAME" ]; then
     if [ -z "$MARIADB_DATABASE" ]; then
@@ -27,6 +27,6 @@ if [ -z "$BACKUP_DB_ROOT_PW" ]; then
     fi
 fi
 
-mariadb-dump -u root --password=$BACKUP_DB_ROOT_PW $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$DATUM".sql.gz"
-DATUMP=$(date +"%Y-%m-%d %H:%M")
-echo "$DATUMP => Backed up database" 
+mariadb-dump -u root --password=$BACKUP_DB_ROOT_PW $BACKUP_DB_NAME | gzip > "/backup/backup-db-"$BACKUP_DB_NAME"-"$BACKUP_DATE".sql.gz"
+BACKUP_DATE_PRINT=$(date +"%Y-%m-%d %H:%M")
+echo "$BACKUP_DATE_PRINT => Backed up database" 

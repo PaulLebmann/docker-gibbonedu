@@ -12,13 +12,13 @@ if [ -z "$BACKUP_DB_NAME" ]; then
     fi
 fi
 
-DATUM=$(date +"%Y%m%d-%H%M")
-DATUMGESTERNBACKUP=$(date -d "yesterday 23:00" +"%Y%m%d-%H%M")
-DATUMGESTERN=$(date -d "yesterday" +"%Y%m%d")
+DATE_NOW=$(date +"%Y%m%d-%H%M")
+DATE_YESTERDAY_BACKUP_NAME=$(date -d "yesterday 23:00" +"%Y%m%d-%H%M")
+DATE_YESTERDAY=$(date -d "yesterday" +"%Y%m%d")
 
-DATUMP=$(date +"%Y-%m-%d %H:%M")
-mv /backup/backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERN"-23* /backup/backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERN".sql.gz
-echo "$DATUMP => moved backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERNBACKUP".sql.gz to backup-db-"$BACKUP_DB_NAME"-"$DATUMGESTERN".sql.gz"
-find /backup/ -name \*${DATUMGESTERN}-\* -delete
+DATE_PRINT=$(date +"%Y-%m-%d %H:%M")
+mv /backup/backup-db-"$BACKUP_DB_NAME"-"$DATE_YESTERDAY"-23* /backup/backup-db-"$BACKUP_DB_NAME"-"$DATE_YESTERDAY".sql.gz
+echo "$DATE_PRINT => moved backup-db-"$BACKUP_DB_NAME"-"$DATE_YESTERDAY_BACKUP_NAME".sql.gz to backup-db-"$BACKUP_DB_NAME"-"$DATE_YESTERDAY".sql.gz"
+find /backup/ -name \*${DATE_YESTERDAY}-\* -delete
 
-echo "$DATUMP => removed hourly backups from $DATUMGESTERN" 
+echo "$DATE_PRINT => removed hourly backups from $DATE_YESTERDAY" 
